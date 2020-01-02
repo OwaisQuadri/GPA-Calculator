@@ -1,0 +1,37 @@
+<br>
+<form [formGroup]="_grades">
+{{grades.value|json}}
+    <fieldset>
+        <br>
+        <h4>GPA Scale Out of:</h4>
+        <select id=gpaScale (change)="doCheck">
+            <option name="gpaScale" value=4>4</option>
+            <option name="gpaScale" value=4.3>4.3</option>
+        </select>
+        <h4>Weighted?</h4>
+        <p>if yes, select weights first please.</p>
+        <select id="weighted" (change)="doCheck">
+            <option name="weighted" value=1>Yes</option>
+            <option name="weighted" value=0>No</option>
+        </select>
+        <br><br><hr>
+        <div>
+        <div formArrayName="grades">
+            <div *ngFor="let grade of grades.controls;let i=index" [formGroupName]="i">
+                <br><button id ="delete" (click)="remGrade()"> Delete Grade</button><br>
+                <p>Letter Grade: <input (change)="updateCalculations(0)" class="input-short" type="text" formControlName="letrGrade" placeholder="A+" class="input-short"></p> 
+                <p>Percent(%): <input (change)="updateCalculations(1)" type="number" class="input-short" formControlName="pGrade" placeholder="100" step=10 min=0 max=100></p>
+                <p *ngIf="gpaScale==4" >GPA out of 4: <input (change)="updateCalculations(2)" class="input-short" *ngIf="gpaScale==4" type="number" formControlName="gpa4Grade" placeholder=4 step=0.1 min=0 max=4.0></p>
+                <p *ngIf="gpaScale==4.3" >GPA out of 4.3:<input (change)="updateCalculations(3)" class="input-short" *ngIf="gpaScale==4.3" type="number" formControlName="gpa43Grade" placeholder=4.3 step=0.1 min=0 max=4.3></p>
+                <p *ngIf='weighted==1'>Weight(%): <input requred (update)="doCheck" type="number" class="w input-short" formControlName="weight" placeholder="100" min="0" max="100"></p> 
+            </div>
+        </div>
+        <button id="add" (click)="addGrade()">Add Grade</button>
+    </div>
+    <div id="result">
+        <p> Final Grade (%) : <input (change)="doCheck" class="input-short" type="number" step=10 id="output" [readonly]="weight" min=50 max=100></p>
+        <!-- if sum of weights is less than to 1, ask for desired grade -->
+        <p id='outputp' [hidden]="weight"></p>
+    </div>
+    </fieldset>
+</form>

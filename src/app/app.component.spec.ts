@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'GPA-Calculator'`, () => {
+  it(`should have as title 'gpa-calculator'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('GPA-Calculator');
+    expect(app.title).toEqual('gpa-calculator');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('GPA-Calculator app is running!');
+    expect(compiled.querySelector('.content span').textContent).toContain('gpa-calculator app is running!');
   });
 });
